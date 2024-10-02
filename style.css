@@ -36,16 +36,16 @@ body {
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;display=swap');
 
-.atharva, .kaabil {
+.manish, .varma {
     font-family: 'Inter', sans-serif;
     color: white; 
 }
 
-.atharva {
+.manish {
     margin-bottom: 0;
 }
 
-.kaabil {
+.varma {
     margin-top: -3px;
 }
 
@@ -368,10 +368,10 @@ background: linear-gradient(90deg, rgba(109,0,251,1) 0%, rgba(57,185,158,1) 0%, 
         margin-right: 4px;
     }
 
-    .atharva{
+    .manish{
         font-size: 20px;
     }
-    .kaabil{
+    .varma{
         font-size: 10px;
     }
 
