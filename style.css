@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: #16141a;
+  
 }
 
 .header {
@@ -411,4 +411,68 @@ background: linear-gradient(90deg, rgba(109,0,251,1) 0%, rgba(57,185,158,1) 0%, 
     }
 
     
+}
+body.dark-mode {
+    background-color: #121212;
+    color: white;
+}
+
+/* Theme toggle button */
+#theme-toggle {
+position: fixed;
+top: 10px;         /* Pushes it below the browser top edge */
+right: 10px;        /* Places it on the left so it doesn't interfere with your CONNECT button (which is on the right) */
+z-index: 9999;     /* Makes sure it stays on top */
+padding: 8px 14px;
+background-color: #f0f0f0;
+color: #333;
+border: none;
+border-radius: 20px;
+font-size: 16px;
+font-family: 'Inter', sans-serif;
+cursor: pointer;
+box-shadow: 0 0 10px rgba(0,0,0,0.1);
+transition: background-color 0.3s, color 0.3s;
+}
+
+
+/* Light and Dark Mode */
+body.dark-mode {
+    background-color: #121212;
+    color: white;
+    transition: background-color 1s ease-in-out, color 1s ease-in-out;
+}
+
+body.light-mode {
+    background-color: #f0f0f0;
+    color: black;
+    transition: background-color 1s ease-in-out, color 1s ease-in-out;
+}
+
+/* h2 color change based on mode */
+body.dark-mode h2.project {
+    color: white;
+}
+body.light-mode h2.project {
+    color: blue;
+}
+
+/* Animated overlay that blends with background */
+.theme-transition-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    background: transparent;
+    mix-blend-mode: difference;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+/* Animation class */
+.theme-transition-overlay.active {
+    opacity: 1;
 }
