@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="style.css">
     <title>Manish Portfolio</title>
 </head>
-<body>
+<body class="dark-mode">
+    <div id="theme-transition" class="theme-transition-overlay"></div>
+    <button id="theme-toggle">🌙</button>
     <div class="header">
         <div class="background-image"></div>
 
@@ -205,6 +207,46 @@
             function openPDF(pdfPath) {
     window.open(pdfPath, '_blank');
   }
+  const toggleButton = document.getElementById("theme-toggle");
+const overlay = document.getElementById("theme-transition");
+
+function setThemeIcon(isDark) {
+    toggleButton.textContent = isDark ? "🌞" : "🌙";
+}
+
+function applyTheme(theme) {
+    document.body.classList.remove("light-mode", "dark-mode");
+    document.body.classList.add(theme);
+    setThemeIcon(theme === "dark-mode");
+}
+
+function toggleTheme() {
+    const isDark = document.body.classList.contains("dark-mode");
+    const newTheme = isDark ? "light-mode" : "dark-mode";
+
+    // Set overlay color based on target theme
+    overlay.style.background = newTheme === "light-mode" ? "#f0f0f0" : "#121212";
+
+    // Trigger animation
+    overlay.classList.add("expand");
+
+    // Wait for animation to finish before applying theme
+    setTimeout(() => {
+        applyTheme(newTheme);
+        localStorage.setItem("theme", newTheme);
+        overlay.classList.remove("expand");
+    }, 1000); // match with transition duration
+}
+
+toggleButton.addEventListener("click", toggleTheme);
+
+// Load theme on start
+window.addEventListener("load", () => {
+    const savedTheme = localStorage.getItem("theme") || "dark-mode";
+    applyTheme(savedTheme);
+});
+
+
     </script>
 
 </body>
