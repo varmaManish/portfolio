@@ -203,24 +203,81 @@ footer{background:var(--ink);padding:24px 52px;border-top:1px solid rgba(245,240
 footer span{font-family:'Space Mono',monospace;font-size:10px;color:rgba(245,240,232,.2);letter-spacing:1px;}
 
 /* RESPONSIVE */
+
+/* ── Tablet ≤960px ── */
 @media(max-width:960px){
-  .hero{grid-template-columns:1fr;padding:100px 28px 60px;gap:48px;}
-  .hero-deco{display:none;}
-  .hero-photo{max-width:360px;margin:0 auto;}
-  .fc1,.fc2,.fc3{display:none;}
   nav,section,footer{padding-left:28px;padding-right:28px;}
+  .hero{
+    grid-template-columns:1fr;
+    grid-template-rows:auto auto;
+    padding:80px 28px 60px;
+    gap:0;
+    min-height:auto;
+  }
+  .hero-deco{display:none;}
+  .fc1,.fc2,.fc3{display:none;}
+
+  /* Photo goes first (row 1), text below (row 2) */
+  .hero-photo{
+    order:-1;
+    width:100%;
+    margin:0 0 36px 0;
+  }
+  /* Switch from tall portrait → wide landscape banner */
+  .photo-wrap{
+    padding-bottom:56%;          /* 16:9-ish wide banner */
+    border-radius:20px;          /* uniform corners on tablet */
+  }
+  /* Badge stays but shrinks slightly */
+  .photo-badge{
+    left:16px; right:16px; bottom:16px;
+    padding:12px 16px;
+  }
+
   .skills-layout{grid-template-columns:1fr;gap:40px;}
   .t-item{grid-template-columns:1fr;gap:8px;}
 }
+
+/* ── Mobile ≤600px ── */
 @media(max-width:600px){
   nav{padding:14px 20px;}
   nav,section,footer{padding-left:20px;padding-right:20px;}
   .nav-links{display:none;}
   .nav-ham{display:flex;}
-  .hero{padding:90px 20px 50px;}
-  .hero-name{letter-spacing:-2px;}
+
+  .hero{padding:72px 20px 48px;gap:0;}
+
+  /* Wide photo banner — full bleed to edges */
+  .hero-photo{
+    margin-left:-20px;
+    margin-right:-20px;
+    margin-bottom:32px;
+    width:calc(100% + 40px);
+  }
+  .photo-wrap{
+    padding-bottom:65%;          /* taller crop on phone to show face */
+    border-radius:0;             /* full bleed, no radius */
+    box-shadow:none;
+  }
+  /* Stronger gradient so badge text pops */
+  .photo-wrap::after{
+    background:linear-gradient(to top, rgba(61,43,26,.6) 0%, rgba(61,43,26,.1) 45%, transparent 65%);
+  }
+  .photo-badge{
+    left:20px; right:20px; bottom:16px;
+    padding:11px 14px; border-radius:12px;
+    gap:10px;
+  }
+  .badge-text{font-size:12px;}
+  .badge-text span{font-size:10px;}
+
+  /* Text side tweaks */
+  .hero-name{font-size:clamp(48px,13vw,72px);letter-spacing:-2px;}
+  .hero-role{font-size:15px;}
   .hero-btns{flex-direction:column;}
   .btn-warm{width:100%;text-align:center;}
+  .hero-socials{flex-wrap:wrap;}
+
   .proj-grid{grid-template-columns:1fr;}
   .sec-title{letter-spacing:-1px;}
   .stats-panel{padding:28px 22px;}
@@ -230,6 +287,16 @@ footer span{font-family:'Space Mono',monospace;font-size:10px;color:rgba(245,240
   body{cursor:auto;}
   a,button{cursor:pointer;}
 }
+
+/* ── Very small ≤380px ── */
+@media(max-width:380px){
+  .photo-wrap{padding-bottom:72%;}   /* even taller crop on tiny screens */
+  .hero-name{font-size:clamp(40px,12vw,56px);}
+  .contact-socials{flex-direction:column;align-items:center;}
+  .csoc{width:100%;text-align:center;}
+}
+
+/* ── Touch devices: kill hover effects ── */
 @media(hover:none){
   #cur,#ring{display:none;}
   body{cursor:auto;}
@@ -288,7 +355,7 @@ footer span{font-family:'Space Mono',monospace;font-size:10px;color:rgba(245,240
       <a href="https://www.instagram.com/manish__vrma" target="_blank" class="soc-btn" title="Instagram">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
       </a>
-      <a href="mailto:mv918038@gmail.com" class="soc-btn" title="Email">
+      <a href="/cdn-cgi/l/email-protection#5c312a656d646c6f641c3b313d3530723f3331" class="soc-btn" title="Email">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
       </a>
     </div>
@@ -450,7 +517,7 @@ footer span{font-family:'Space Mono',monospace;font-size:10px;color:rgba(245,240
   <div class="sec-label reveal">Let's Connect</div>
   <h2 class="contact-big reveal">Got a project<br><em>in mind?</em></h2>
   <p class="contact-sub reveal">Open to full-time roles, freelance & collaborations.</p>
-  <a href="mailto:mv918038@gmail.com" class="contact-email reveal">mv918038@gmail.com</a>
+  <a href="/cdn-cgi/l/email-protection#0d607b343c353d3e354d6a606c6461236e6260" class="contact-email reveal"><span class="__cf_email__" data-cfemail="4e2338777f767e7d760e29232f2722602d2123">[email&#160;protected]</span></a>
   <div class="contact-socials reveal">
     <a href="https://www.linkedin.com/in/manish-varma-263775308" target="_blank" class="csoc">LinkedIn</a>
     <a href="https://www.github.com/varmaManish" target="_blank" class="csoc">GitHub</a>
@@ -466,7 +533,7 @@ footer span{font-family:'Space Mono',monospace;font-size:10px;color:rgba(245,240
   <span>Built with care ✦</span>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // Mobile menu
 function toggleMenu(){const m=document.getElementById('mobMenu'),h=document.getElementById('ham');m.classList.toggle('open');h.classList.toggle('open');}
 function closeMenu(){document.getElementById('mobMenu').classList.remove('open');document.getElementById('ham').classList.remove('open');}
@@ -501,10 +568,3 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
 // Counters
 const co=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){const t=+e.target.dataset.count;let c=0;const s=t/30;const i=setInterval(()=>{c=Math.min(c+s,t);e.target.textContent=Math.round(c);if(c>=t)clearInterval(i);},40);co.unobserve(e.target);}});},{threshold:.5});
-document.querySelectorAll('[data-count]').forEach(c=>co.observe(c));
-
-// Nav shadow on scroll
-window.addEventListener('scroll',()=>{document.getElementById('nav').style.boxShadow=window.scrollY>40?'0 2px 20px rgba(61,43,26,0.08)':'none';},{passive:true});
-</script>
-</body>
-</html>
