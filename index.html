@@ -204,17 +204,22 @@ footer span{font-family:'Space Mono',monospace;font-size:10px;color:rgba(245,240
 
 /* RESPONSIVE */
 
-/* ── Tablet 601px–960px ── */
+/* ════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════ */
+
+/* Tablet: 601 – 960px */
 @media(min-width:601px) and (max-width:960px){
-  nav,section,footer{padding-left:28px;padding-right:28px;}
+  nav,section,footer{ padding-left:28px; padding-right:28px; }
   .hero{
     grid-template-columns:1fr;
-    padding:80px 28px 60px;
+    padding:90px 28px 60px;
     gap:0;
     min-height:auto;
   }
-  .hero-deco{display:none;}
-  .fc1,.fc2,.fc3{display:none;}
+  .hero-deco{ display:none; }
+  /* chips hidden – they stick out past the card edges on tablet */
+  .fc1,.fc2,.fc3{ display:none; }
   .hero-photo{
     order:-1;
     width:100%;
@@ -224,105 +229,104 @@ footer span{font-family:'Space Mono',monospace;font-size:10px;color:rgba(245,240
     padding-bottom:52%;
     border-radius:20px;
   }
-  .photo-badge{left:16px;right:16px;bottom:16px;padding:12px 16px;}
-  .skills-layout{grid-template-columns:1fr;gap:40px;}
-  .t-item{grid-template-columns:1fr;gap:8px;}
+  .photo-badge{ left:16px; right:16px; bottom:16px; padding:12px 16px; }
+  .skills-layout{ grid-template-columns:1fr; gap:40px; }
+  .t-item{ grid-template-columns:1fr; gap:8px; }
 }
 
-/* ── Mobile ≤600px ── */
+/* Mobile: ≤600px */
 @media(max-width:600px){
-  nav{padding:14px 20px;}
-  nav,section,footer{padding-left:20px;padding-right:20px;}
-  .nav-links{display:none;}
-  .nav-ham{display:flex;}
+  nav{ padding:14px 20px; }
+  nav, section, footer{ padding-left:20px; padding-right:20px; }
+  .nav-links{ display:none; }
+  .nav-ham{ display:flex; }
 
-  /* Hero: single column, text left + circle photo right inline */
+  /* ── Hero layout ── */
   .hero{
-    padding:80px 20px 48px;
-    grid-template-columns:1fr;
-    gap:0;
+    display:block;              /* drop grid entirely on mobile */
+    padding:76px 20px 48px;
+    min-height:auto;
   }
+  .hero-deco{ display:none; }
 
-  /* Photo floats right beside the name/tag at top of hero */
+  /* Always hide floating chips on mobile – they overlap the face */
+  .fc1,.fc2,.fc3{ display:none !important; }
+
+  /* ── Photo: medium circle, floated right ── */
   .hero-photo{
-    order:-1;
     float:right;
-    width:110px;
-    height:110px;
-    margin:0 0 16px 16px;
-    shape-outside:circle();
+    width:108px;
+    height:108px;
+    margin:4px 0 12px 16px;  /* sits beside the tag + name */
+    position:relative;        /* keep stacking context for ::after */
   }
-
-  /* Make the wrap a perfect circle */
   .photo-wrap{
-    width:110px;
-    height:110px;
-    padding-bottom:0;             /* override the % trick */
+    width:108px;
+    height:108px;
+    padding-bottom:0;         /* cancel the % trick */
     border-radius:50%;
-    box-shadow:0 6px 24px rgba(61,43,26,.25),
-               0 0 0 3px var(--warm1),
-               0 0 0 5px var(--accent);
     overflow:hidden;
+    box-shadow:
+      0 0 0 3px var(--warm1),
+      0 0 0 5px var(--accent),
+      0 8px 24px rgba(61,43,26,.25);
   }
-  .photo-wrap img{
-    position:absolute;inset:0;
-    width:100%;height:100%;
-    object-fit:cover;
-  }
-  /* Hide gradient overlay & badge inside circle — not enough room */
-  .photo-wrap::after{display:none;}
-  .photo-badge{display:none;}
+  /* img already absolute/inset from base styles — works inside fixed-size wrap */
+  .photo-wrap::after{ display:none; }   /* hide dark gradient */
+  .photo-badge{ display:none; }        /* no room for badge in circle */
 
-  /* Status shown as a small pill below the circle instead */
+  /* Tiny "● Open to work" label beneath the circle */
   .hero-photo::after{
     content:'● Open to work';
     display:block;
-    margin-top:8px;
+    margin-top:7px;
     font-family:'Space Mono',monospace;
-    font-size:9px;
+    font-size:8.5px;
     letter-spacing:1px;
     color:var(--accent);
     text-align:center;
+    line-height:1;
   }
 
-  /* Text flows around the float naturally */
-  .hero-left{overflow:hidden;}   /* clearfix for the float */
-  .hero-name{font-size:clamp(42px,11vw,64px);letter-spacing:-2px;}
-  .hero-role{font-size:15px;}
-  .hero-btns{flex-direction:column;clear:both;}
-  .btn-warm{width:100%;text-align:center;}
-  .hero-socials{flex-wrap:wrap;}
+  /* ── Text side ── */
+  .hero-left{ overflow:hidden; }  /* clearfix */
+  .hero-name{ font-size:clamp(40px,10.5vw,60px); letter-spacing:-2px; margin-bottom:16px; }
+  .hero-role{ font-size:14px; margin-bottom:24px; }
+  .hero-btns{ flex-direction:column; clear:both; margin-top:4px; }
+  .btn-warm{ width:100%; text-align:center; }
+  .hero-socials{ flex-wrap:wrap; margin-top:20px; }
 
-  .proj-grid{grid-template-columns:1fr;}
-  .sec-title{letter-spacing:-1px;}
-  .stats-panel{padding:28px 22px;}
-  .stat-val{font-size:32px;}
-  footer{flex-direction:column;gap:8px;text-align:center;}
-  #cur,#ring{display:none;}
-  body{cursor:auto;}
-  a,button{cursor:pointer;}
+  /* ── Rest of page ── */
+  .proj-grid{ grid-template-columns:1fr; }
+  .skills-layout{ grid-template-columns:1fr; gap:32px; }
+  .t-item{ grid-template-columns:1fr; gap:6px; }
+  .sec-title{ letter-spacing:-1px; }
+  .stats-panel{ padding:24px 20px; }
+  .stat-val{ font-size:30px; }
+  .other-grid{ flex-direction:column; }
+  footer{ flex-direction:column; gap:8px; text-align:center; }
+  .contact-socials{ gap:8px; }
+
+  #cur,#ring{ display:none; }
+  body{ cursor:auto; }
+  a, button{ cursor:pointer; }
 }
 
-/* ── Very small ≤380px ── */
+/* Very small: ≤380px */
 @media(max-width:380px){
-  .hero-photo{width:90px;height:90px;}
-  .photo-wrap{width:90px;height:90px;}
-  .hero-name{font-size:clamp(36px,10vw,52px);}
-  .contact-socials{flex-direction:column;align-items:center;}
-  .csoc{width:100%;text-align:center;}
+  .hero-photo{ width:88px; height:88px; }
+  .photo-wrap{ width:88px; height:88px; }
+  .hero-name{ font-size:clamp(34px,9.5vw,48px); }
+  .contact-socials{ flex-direction:column; align-items:center; }
+  .csoc{ width:100%; text-align:center; }
 }
 
-/* ── Touch devices: kill hover effects ── */
+/* Touch / no-hover: disable JS-only effects */
 @media(hover:none){
-  #cur,#ring{display:none;}
-  body{cursor:auto;}
-  a,button{cursor:pointer;}
-  .pill::before{display:none;}
-}
-/* ── Shared: skills + timeline stack on all small screens ── */
-@media(max-width:960px){
-  .skills-layout{grid-template-columns:1fr;gap:40px;}
-  .t-item{grid-template-columns:1fr;gap:8px;}
+  #cur,#ring{ display:none; }
+  body{ cursor:auto; }
+  a, button{ cursor:pointer; }
+  .pill::before{ display:none; }
 }
 </style>
 </head>
