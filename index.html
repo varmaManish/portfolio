@@ -242,16 +242,18 @@ footer span{font-family:'Space Mono',monospace;font-size:10px;color:rgba(245,240
   }
   .hero-deco{display:none;}
 
-  /* ── MOBILE HERO TOP ROW: photo LEFT + tag/name RIGHT ── */
+  /* ── MOBILE HERO TOP ROW: photo LEFT + name RIGHT ── */
   .hero-top-row{
     display:flex;
+    flex-direction:row;
     align-items:flex-start;
     gap:16px;
     margin-bottom:20px;
   }
 
-  /* Photo: medium circle on the LEFT beside name */
+  /* Photo: circle on the RIGHT */
   .hero-photo{
+    order:1;
     flex-shrink:0;
     width:100px;
     height:100px;
@@ -259,6 +261,9 @@ footer span{font-family:'Space Mono',monospace;font-size:10px;color:rgba(245,240
     opacity:1 !important;
     animation:none !important;
   }
+
+  /* Name column on the LEFT */
+  .hero-name-col{ order:0; flex:1; }
   .photo-wrap{
     width:100px;
     height:100px;
