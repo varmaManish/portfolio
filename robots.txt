@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Prevent indexing of raw resume files to avoid duplicate content flags
+Disallow: /*.pdf$
+
+Sitemap: https://manish-dev.in/sitemap.xml

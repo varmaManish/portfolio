@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- SEO Title specific to the project -->
+  <title>Fake UPI Screenshot Detector | AI Projects by Manish Varma</title>
+  <meta name="description" content="An AI-powered fraud detection system analyzing manipulated UPI payment screenshots using OCR, FastAPI, and MongoDB. Engineered by Manish Varma.">
+  <link rel="canonical" href="https://manish-dev.in/project-upi-detector.html">
+  <link rel="stylesheet" href="style.css">
+
+  <!-- JSON-LD for Project Detail -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Fake UPI Screenshot Detector",
+    "applicationCategory": "SecurityApplication",
+    "operatingSystem": "Web",
+    "author": {
+      "@type": "Person",
+      "name": "Manish Varma"
+    },
+    "description": "AI-powered fraud detection system utilizing OCR to analyze manipulated payment receipts."
+  }
+  </script>
+</head>
+<body>
+  <!-- Include Navigation Here -->
+
+  <main style="padding-top: 120px;">
+    <article class="project-article">
+      <!-- Project Header -->
+      <header class="project-hero reveal">
+        <div class="sec-label">Computer Vision · Security</div>
+        <h1 class="sec-title">Fake UPI<br><em>Detector.</em></h1>
+        <p class="project-lead">An AI-powered fraud detection system analyzing manipulated UPI payment screenshots to prevent financial scams.</p>
+        
+        <div class="project-links">
+          <a href="#" class="btn-warm btn-fill" target="_blank">View Live Demo ↗</a>
+          <a href="#" class="btn-warm btn-stroke" target="_blank">GitHub Repository</a>
+        </div>
+      </header>
+
+      <!-- Architecture & Content -->
+      <div class="project-content reveal">
+        <section class="content-section">
+          <h2>1. The Problem</h2>
+          <p>With the rise of digital payments in India, bad actors frequently use manipulated screenshots of UPI transactions (Google Pay, PhonePe, Paytm) to deceive merchants. Verifying these manually is slow and error-prone.</p>
+        </section>
+
+        <section class="content-section">
+          <h2>2. Technical Architecture</h2>
+          <p>The system was designed as a microservice using <strong>FastAPI</strong> for rapid, asynchronous handling of image uploads. The core detection logic relies on Optical Character Recognition (OCR) combined with heuristic analysis of font rendering, alignment, and pixel density anomalies.</p>
+          
+          <ul class="tech-list">
+            <li><strong>Backend API:</strong> FastAPI (Python)</li>
+            <li><strong>Vision Processing:</strong> Tesseract OCR, OpenCV</li>
+            <li><strong>Database:</strong> MongoDB (for logging detection metadata)</li>
+            <li><strong>Deployment:</strong> Docker, AWS</li>
+          </ul>
+        </section>
+
+        <section class="content-section">
+          <h2>3. Engineering Challenges</h2>
+          <p>The primary challenge was reducing latency. Initial OCR passes were taking over 2 seconds per image. By optimizing matrix transformations during the image pre-processing phase (converting to grayscale, applying binary thresholding, and utilizing specific linear algebra shortcuts to calculate bounding boxes), I reduced processing time by 45%.</p>
+          
+          <!-- Code snippet support -->
+          <pre><code>
+# Example: Optimized image pre-processing pipeline
+def preprocess_receipt(image_path):
+    img = cv2.imread(image_path)
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    
+    # Applying Otsu's thresholding for dynamic contrast
+    thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)[1]
+    return thresh
+          </code></pre>
+        </section>
+
+        <section class="content-section">
+          <h2>4. Future Improvements</h2>
+          <p>The next iteration will replace heuristic rules with a lightweight Convolutional Neural Network (CNN) trained specifically on compression artifacts common in altered JPEGs.</p>
+        </section>
+      </div>
+    </article>
+  </main>
+
+  <!-- Include Footer Here -->
+  <script src="main.js" defer></script>
+</body>
+</html>
