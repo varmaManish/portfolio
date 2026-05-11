@@ -23,8 +23,28 @@
   </script>
 </head>
 <body>
-  <!-- Include Navigation Here -->
-
+  <header>
+    <nav id="nav" aria-label="Main Navigation">
+      <div class="nav-logo"><a href="/" aria-label="Home">Manish <span>.</span></a></div>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="nav-ham" id="ham" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+    <div class="mob-menu" id="mobMenu" aria-hidden="true">
+      <a href="#about">About</a>
+      <a href="projects.html">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="blog.html">Blog</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </header>
   <main style="padding-top: 120px;">
     <section id="blog-index">
       <div class="sec-label reveal">Writing & Research</div>
