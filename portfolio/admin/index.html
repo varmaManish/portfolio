@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login | Manish Varma</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,300&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body class="login-page">
+
+  <div class="login-card">
+    <div class="login-logo">Manish<span>.</span></div>
+    <span class="login-badge">Admin Panel</span>
+
+    <h1>Welcome<br><em>Back.</em></h1>
+    <p class="login-sub">Sign in to manage your portfolio content.</p>
+
+    <form id="loginForm">
+      <div class="form-group">
+        <label class="form-label" for="email">Email Address</label>
+        <input class="form-input" type="email" id="email" placeholder="admin@example.com" required autocomplete="email">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="password">Password</label>
+        <input class="form-input" type="password" id="password" placeholder="••••••••" required autocomplete="current-password">
+      </div>
+      <button type="submit" class="btn-login" id="loginBtn">
+        <span id="loginBtnText">Sign In</span>
+        <span>→</span>
+      </button>
+      <div class="error-msg" id="errorMsg"></div>
+    </form>
+
+    <a href="../index.html" class="back-link">← Back to Portfolio</a>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <script src="../js/firebase-config.js"></script>
+  <script>
+    auth.onAuthStateChanged(user => {
+      if (user) window.location.href = 'dashboard.html';
+    });
+
+    const loginForm = document.getElementById('loginForm');
+    const loginBtn  = document.getElementById('loginBtn');
+    const btnText   = document.getElementById('loginBtnText');
+    const errorMsg  = document.getElementById('errorMsg');
+
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorMsg.style.display = 'none';
+      loginBtn.disabled = true;
+      btnText.textContent = 'Signing in…';
+
+      try {
+        await auth.signInWithEmailAndPassword(
+          document.getElementById('email').value.trim(),
+          document.getElementById('password').value
+        );
+        window.location.href = 'dashboard.html';
+      } catch (err) {
+        const messages = {
+          'auth/invalid-credential': 'Invalid email or password.',
+          'auth/user-not-found':     'No account found with this email.',
+          'auth/wrong-password':     'Incorrect password.',
+          'auth/too-many-requests':  'Too many attempts. Try again later.',
+          'auth/invalid-email':      'Please enter a valid email address.'
+        };
+        errorMsg.textContent = messages[err.code] || 'Login failed. Check your credentials.';
+        errorMsg.style.display = 'block';
+        loginBtn.disabled = false;
+        btnText.textContent = 'Sign In';
+      }
+    });
+  </script>
+</body>
+</html>

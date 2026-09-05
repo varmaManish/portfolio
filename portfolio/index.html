@@ -389,12 +389,12 @@
 
   // ── DYNAMIC SKILLS ──
   try {
-    const skillsSnap = await db.collection('skills')
-      .where('visible', '==', true)
-      .orderBy('order')
-      .get();
+    const skillsSnap = await db.collection('skills').get();
     if (!skillsSnap.empty) {
-      const skillsData = skillsSnap.docs.map(d => ({ id: d.id, ...d.data() }));
+      const skillsData = skillsSnap.docs
+        .map(d => ({ id: d.id, ...d.data() }))
+        .filter(s => s.visible !== false)
+        .sort((a, b) => (a.order || 99) - (b.order || 99));
       const grid = document.getElementById('skillsGrid');
       if (grid) {
         grid.innerHTML = skillsData.map(s => `
@@ -415,12 +415,12 @@
 
   // ── EXPERIENCE ──
   try {
-    const expSnap = await db.collection('experience')
-      .where('visible', '==', true)
-      .orderBy('order')
-      .get();
+    const expSnap = await db.collection('experience').get();
     if (!expSnap.empty) {
-      const expData = expSnap.docs.map(d => ({ id: d.id, ...d.data() }));
+      const expData = expSnap.docs
+        .map(d => ({ id: d.id, ...d.data() }))
+        .filter(ex => ex.visible !== false)
+        .sort((a, b) => (a.order || 99) - (b.order || 99));
       const section = document.getElementById('experienceSec');
       const list    = document.getElementById('experienceListPublic');
       if (section && list) {

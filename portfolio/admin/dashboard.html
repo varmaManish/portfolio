@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en" class="dashboard-page">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Manish Varma</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,300&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body class="dashboard-page">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar">
+    <div class="sidebar-top">
+      <div class="sidebar-logo">Manish<span>.</span></div>
+      <span class="sidebar-badge">Admin Panel</span>
+    </div>
+    <nav class="sidebar-nav">
+      <button class="nav-btn active" data-tab="projects">
+        <span class="nav-icon">📁</span><span>Projects</span>
+      </button>
+      <button class="nav-btn" data-tab="blog">
+        <span class="nav-icon">✍️</span><span>Blog Posts</span>
+      </button>
+      <button class="nav-btn" data-tab="skills">
+        <span class="nav-icon">🛠️</span><span>Skills</span>
+      </button>
+      <button class="nav-btn" data-tab="experience">
+        <span class="nav-icon">💼</span><span>Experience</span>
+      </button>
+      <button class="nav-btn" data-tab="appearance">
+        <span class="nav-icon">🎨</span><span>Appearance</span>
+      </button>
+      <button class="nav-btn" data-tab="settings">
+        <span class="nav-icon">⚙️</span><span>Settings</span>
+      </button>
+    </nav>
+    <div class="sidebar-bottom">
+      <a href="../index.html" class="btn-view-site" target="_blank">View Site ↗</a>
+      <div class="admin-email" id="adminEmail"></div>
+      <button class="btn-logout" id="logoutBtn">Sign Out</button>
+    </div>
+  </aside>
+
+  <!-- ── MAIN ── -->
+  <main class="main">
+
+    <!-- PROJECTS TAB -->
+    <div id="tab-projects" class="tab-pane active">
+      <div class="page-header">
+        <h1 class="page-title">Projects<em>.</em></h1>
+        <button class="btn-primary" id="addProjectBtn">+ Add Project</button>
+      </div>
+      <div id="seedBannerProjects" class="seed-banner" style="display:none;">
+        <p><strong>First time here?</strong> Import your existing portfolio data to get started quickly.</p>
+        <button class="btn-primary" id="seedBtn" style="white-space:nowrap;">Import Existing Data</button>
+      </div>
+      <div id="projectsList"><div class="loading">Loading projects…</div></div>
+    </div>
+
+    <!-- BLOG TAB -->
+    <div id="tab-blog" class="tab-pane">
+      <div class="page-header">
+        <h1 class="page-title">Blog<em>.</em></h1>
+        <button class="btn-primary" id="addBlogBtn">+ Add Post</button>
+      </div>
+      <div id="blogList"><div class="loading">Loading posts…</div></div>
+    </div>
+
+    <!-- SKILLS TAB -->
+    <div id="tab-skills" class="tab-pane">
+      <div class="page-header">
+        <h1 class="page-title">Skills<em>.</em></h1>
+        <button class="btn-primary" id="addSkillBtn">+ Add Category</button>
+      </div>
+      <p style="color:var(--ad-muted);font-size:0.85rem;margin-bottom:1.5rem;">
+        Each category (Languages, ML &amp; Data, etc.) appears as a card in the Skills section of your homepage.
+      </p>
+      <div id="skillsList"><div class="loading">Loading skills…</div></div>
+    </div>
+
+    <!-- EXPERIENCE TAB -->
+    <div id="tab-experience" class="tab-pane">
+      <div class="page-header">
+        <h1 class="page-title">Experience<em>.</em></h1>
+        <button class="btn-primary" id="addExperienceBtn">+ Add Role</button>
+      </div>
+      <p style="color:var(--ad-muted);font-size:0.85rem;margin-bottom:1.5rem;">
+        Work history entries appear in the Experience section on your homepage. Add your internships, jobs, and freelance roles.
+      </p>
+      <div id="experienceList"><div class="loading">Loading experience…</div></div>
+    </div>
+
+    <!-- APPEARANCE TAB -->
+    <div id="tab-appearance" class="tab-pane">
+      <div class="page-header">
+        <h1 class="page-title">Appearance<em>.</em></h1>
+        <div style="display:flex;gap:0.75rem;">
+          <button class="btn-secondary" id="resetAppearanceBtn">Reset Defaults</button>
+          <button class="btn-primary"   id="saveAppearanceBtn">Save &amp; Apply</button>
+        </div>
+      </div>
+
+      <!-- Live preview -->
+      <div class="appearance-preview" id="appearancePreview">
+        <div class="preview-label">Live Preview</div>
+        <div class="preview-card">
+          <div class="preview-nav">
+            <span class="preview-logo">Manish<span class="preview-dot">.</span></span>
+            <div class="preview-nav-links">
+              <span>About</span><span>Projects</span><span>Blog</span>
+            </div>
+          </div>
+          <div class="preview-hero">
+            <div class="preview-eyebrow">Available for Roles</div>
+            <div class="preview-heading">Software<br><em>Developer.</em></div>
+            <p class="preview-body">Building practical intelligent systems with Python and ML.</p>
+            <div style="display:flex;gap:8px;margin-top:12px;">
+              <div class="preview-btn-fill">Download Resume</div>
+              <div class="preview-btn-stroke">View Projects</div>
+            </div>
+          </div>
+          <div class="preview-footer">
+            <span class="preview-logo">Manish<span class="preview-dot">.</span></span>
+            <span class="preview-footer-copy">© 2026 Manish Varma</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Color Groups -->
+      <div class="color-grid">
+
+        <div class="settings-section">
+          <div class="settings-section-title">Accent &amp; Brand</div>
+          <div class="color-list">
+            <div class="color-item">
+              <input type="color" class="color-swatch" id="clr--accent" value="#c97d3a">
+              <div class="color-info">
+                <span class="color-name">Primary Accent</span>
+                <span class="color-desc">Buttons, links, section labels, highlights</span>
+              </div>
+            </div>
+            <div class="color-item">
+              <input type="color" class="color-swatch" id="clr--accent2" value="#e8a055">
+              <div class="color-info">
+                <span class="color-name">Secondary Accent</span>
+                <span class="color-desc">Hover states, skill tags, dark-section accents</span>
+              </div>
+            </div>
+            <div class="color-item">
+              <input type="color" class="color-swatch" id="clr--brown" value="#6b4e35">
+              <div class="color-info">
+                <span class="color-name">Brand Brown</span>
+                <span class="color-desc">Logo, nav CTA button, highlight chips</span>
+              </div>
+            </div>
+            <div class="color-item">
+              <input type="color" class="color-swatch" id="clr--darkbr" value="#3d2b1a">
+              <div class="color-info">
+                <span class="color-name">Dark Brown</span>
+                <span class="color-desc">Hover state on brown elements</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <div class="settings-section-title">Text Colors</div>
+          <div class="color-list">
+            <div class="color-item">
+              <input type="color" class="color-swatch" id="clr--ink" value="#1a0f06">
+              <div class="color-info">
+                <span class="color-name">Ink / Dark</span>
+                <span class="color-desc">Headings, footer background, skills section bg</span>
+              </div>
+            </div>
+            <div class="color-item">
+              <input type="color" class="color-swatch" id="clr--text" value="#2c1f12">
+              <div class="color-info">
+                <span class="color-name">Body Text</span>
+                <span class="color-desc">Main readable text across the site</span>
+              </div>
+            </div>
+            <div class="color-item">
+              <input type="color" class="color-swatch" id="clr--muted" value="#7a6652">
+              <div class="color-info">
+                <span class="color-name">Muted Text</span>
+                <span class="color-desc">Secondary text, captions, descriptions</span>
+              </div>
+            </div>
+            <div class="color-item">
+              <input type="color" class="color-swatch" id="clr--cream" value="#f5f0e8">
+              <div class="color-info">
+                <span class="color-name">Cream / Light</span>
+                <span class="color-desc">Text on dark backgrounds (footer, skills section)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <div class="settings-section-title">Background Colors</div>
+          <div class="color-list">
+            <div class="color-item">
+              <input type="color" class="color-swatch" id="clr--warm0" value="#faf7f2">
+              <div class="color-info">
+                <span class="color-name">Page Background</span>
+                <span class="color-desc">Main page background color</span>
+              </div>
+            </div>
+            <div class="color-item">
+              <input type="color" class="color-swatch" id="clr--warm1" value="#f0e9db">
+              <div class="color-info">
+                <span class="color-name">Card Background</span>
+                <span class="color-desc">Project cards, about section, contact background</span>
+              </div>
+            </div>
+            <div class="color-item">
+              <input type="color" class="color-swatch" id="clr--warm2" value="#e5ddd0">
+              <div class="color-info">
+                <span class="color-name">Subtle Background</span>
+                <span class="color-desc">Inputs, chips, tags, toggle backgrounds</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /.color-grid -->
+    </div><!-- /#tab-appearance -->
+
+    <!-- SETTINGS TAB -->
+    <div id="tab-settings" class="tab-pane">
+      <div class="page-header">
+        <h1 class="page-title">Settings<em>.</em></h1>
+        <button class="btn-primary" id="saveSettingsBtn">Save Changes</button>
+      </div>
+
+      <div class="settings-section">
+        <div class="settings-section-title">Availability Status</div>
+        <div class="field-toggle-row">
+          <span class="field-toggle-label">Show "Available for Roles" badge on homepage</span>
+          <label class="toggle">
+            <input type="checkbox" id="settingAvailable" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <div class="settings-section-title">Hero Stats</div>
+        <div class="stats-grid">
+          <div class="field-group">
+            <label class="field-label">Projects Built</label>
+            <input class="field-input" type="text" id="statProjects" placeholder="8+" value="8+">
+          </div>
+          <div class="field-group">
+            <label class="field-label">Domains Covered</label>
+            <input class="field-input" type="text" id="statDomains" placeholder="4+" value="4+">
+          </div>
+          <div class="field-group">
+            <label class="field-label">Problems Solved</label>
+            <input class="field-input" type="text" id="statOther" placeholder="∞" value="∞">
+          </div>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <div class="settings-section-title">About Me — Paragraphs</div>
+        <div class="field-group">
+          <label class="field-label">Paragraph 1 (Lead)</label>
+          <textarea class="field-textarea" id="aboutP1" rows="3"></textarea>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Paragraph 2</label>
+          <textarea class="field-textarea" id="aboutP2" rows="3"></textarea>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Paragraph 3 (Location / Availability)</label>
+          <textarea class="field-textarea" id="aboutP3" rows="2"></textarea>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <div class="settings-section-title">Typing Animation Phrases</div>
+        <div class="field-group">
+          <label class="field-label">Phrases (one per line)</label>
+          <textarea class="field-textarea" id="typingPhrases" rows="6"
+            placeholder="Machine Learning models.&#10;FastAPI backends.&#10;Scalable data pipelines."></textarea>
+          <p class="field-hint">Each line becomes a typed phrase in the hero section.</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ── DRAWER ── -->
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+  <div class="drawer" id="drawer">
+    <div class="drawer-header">
+      <span class="drawer-title" id="drawerTitle">Add Project</span>
+      <button class="drawer-close" id="drawerClose">✕</button>
+    </div>
+    <div class="drawer-body" id="drawerBody"></div>
+    <div class="drawer-footer">
+      <button class="btn-secondary" id="drawerCancel">Cancel</button>
+      <button class="btn-primary"   id="drawerSave">Save</button>
+    </div>
+  </div>
+
+  <!-- ── CONFIRM DIALOG ── -->
+  <div class="confirm-overlay" id="confirmOverlay">
+    <div class="confirm-box">
+      <h3 id="confirmTitle">Delete this item?</h3>
+      <p  id="confirmMsg">This action cannot be undone.</p>
+      <div class="confirm-actions">
+        <button class="btn-secondary" id="confirmCancel">Cancel</button>
+        <button class="btn-danger"    id="confirmOk">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TOAST ── -->
+  <div class="toast" id="toast"></div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <script src="../js/firebase-config.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

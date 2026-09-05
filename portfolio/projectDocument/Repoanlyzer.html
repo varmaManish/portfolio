@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Repo-Analyzer | Engineering Case Study</title>
+
+<style>
+
+:root{
+    --bg:#ffffff;
+    --text:#111111;
+    --muted:#5f6368;
+    --border:#e6e6e6;
+    --accent:#2563eb;
+    --code:#f7f7f7;
+    --max-width:780px;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Inter,system-ui,-apple-system,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.9;
+    -webkit-font-smoothing:antialiased;
+}
+
+.container{
+    width:min(var(--max-width),92%);
+    margin:auto;
+}
+
+/* ---------------- HEADER ---------------- */
+
+header{
+    padding:110px 0 70px;
+    border-bottom:1px solid var(--border);
+}
+
+.badge{
+    display:inline-block;
+    padding:6px 14px;
+    border:1px solid var(--border);
+    border-radius:999px;
+    color:var(--muted);
+    font-size:14px;
+    margin-bottom:28px;
+}
+
+h1{
+    font-size:clamp(2.3rem,5vw,4rem);
+    line-height:1.15;
+    margin-bottom:24px;
+    letter-spacing:-1px;
+}
+
+.subtitle{
+    color:var(--muted);
+    font-size:1.08rem;
+    max-width:720px;
+}
+
+/* ---------------- NAV ---------------- */
+
+nav{
+    position:sticky;
+    top:0;
+    background:white;
+    border-bottom:1px solid var(--border);
+    z-index:100;
+}
+
+nav .container{
+    display:flex;
+    gap:24px;
+    overflow:auto;
+    padding:14px 0;
+}
+
+nav a{
+    text-decoration:none;
+    color:var(--muted);
+    font-size:14px;
+    white-space:nowrap;
+}
+
+nav a:hover{
+    color:var(--accent);
+}
+
+/* ---------------- SECTIONS ---------------- */
+
+section{
+    padding:80px 0;
+    border-bottom:1px solid var(--border);
+}
+
+h2{
+    font-size:clamp(1.8rem,3vw,2.5rem);
+    margin-bottom:28px;
+    letter-spacing:-0.5px;
+}
+
+h3{
+    margin-bottom:14px;
+    font-size:1.15rem;
+}
+
+p{
+    margin-bottom:24px;
+    color:#222;
+}
+
+ul{
+    margin-left:22px;
+    margin-bottom:26px;
+}
+
+li{
+    margin-bottom:12px;
+    color:#222;
+}
+
+/* ---------------- GRID ---------------- */
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:18px;
+    margin-top:30px;
+}
+
+.card{
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:24px;
+}
+
+.card p{
+    color:var(--muted);
+    margin-bottom:0;
+}
+
+/* ---------------- CODE ---------------- */
+
+pre{
+    background:var(--code);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:22px;
+    overflow:auto;
+    margin:30px 0;
+}
+
+code{
+    font-family:Consolas,Monaco,monospace;
+    font-size:14px;
+    line-height:1.7;
+}
+
+/* ---------------- TABLE ---------------- */
+
+.table-wrapper{
+    overflow:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+th,td{
+    border:1px solid var(--border);
+    padding:14px;
+    text-align:left;
+}
+
+th{
+    background:#fafafa;
+}
+
+/* ---------------- HIGHLIGHT ---------------- */
+
+.highlight{
+    color:var(--accent);
+    font-weight:600;
+}
+
+/* ---------------- FOOTER ---------------- */
+
+footer{
+    padding:60px 0;
+    text-align:center;
+}
+
+footer p{
+    color:var(--muted);
+}
+
+/* ---------------- MOBILE ---------------- */
+
+@media(max-width:768px){
+
+    nav{
+        position:relative;
+    }
+
+    header{
+        padding-top:80px;
+    }
+
+    section{
+        padding:60px 0;
+    }
+
+    body{
+        line-height:1.8;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="container">
+
+<div class="badge">
+Engineering Case Study
+</div>
+
+<h1>
+Repo-Analyzer with Visual Dashboard
+</h1>
+
+<p class="subtitle">
+A full-stack repository analytics platform that transforms GitHub repository data into actionable engineering insights using FastAPI, asynchronous APIs, contributor analytics, and interactive dashboard visualization.
+</p>
+
+</div>
+
+</header>
+
+<nav>
+
+<div class="container">
+
+<a href="#overview">Overview</a>
+<a href="#architecture">Architecture</a>
+<a href="#features">Features</a>
+<a href="#backend">Backend</a>
+<a href="#analytics">Analytics</a>
+<a href="#challenges">Challenges</a>
+<a href="#future">Future Scope</a>
+
+</div>
+
+</nav>
+
+<section id="overview">
+
+<div class="container">
+
+<h2>Project Overview</h2>
+
+<p>
+Repo-Analyzer is a repository intelligence platform designed to analyze GitHub repositories and visualize engineering insights through modern dashboards and structured analytical workflows.
+</p>
+
+<p>
+The system fetches repository metadata, commits, contributors, branch activity, and repository health indicators using the GitHub REST API and transforms them into interactive engineering analytics.
+</p>
+
+<p>
+The project was designed with a strong focus on:
+</p>
+
+<ul>
+<li>modular backend architecture</li>
+<li>asynchronous API communication</li>
+<li>real-time dashboard rendering</li>
+<li>repository intelligence systems</li>
+<li>scalable engineering workflows</li>
+</ul>
+
+</div>
+
+</section>
+
+<section id="features">
+
+<div class="container">
+
+<h2>Core Features</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>Multi Repository Analysis</h3>
+<p>
+Analyze and compare multiple GitHub repositories simultaneously.
+</p>
+</div>
+
+<div class="card">
+<h3>Contributor Analytics</h3>
+<p>
+Track contribution consistency, impact, and collaboration metrics.
+</p>
+</div>
+
+<div class="card">
+<h3>Interactive Dashboard</h3>
+<p>
+Visualize repository intelligence using Chart.js and Mermaid.js.
+</p>
+</div>
+
+<div class="card">
+<h3>Secure Authentication</h3>
+<p>
+OAuth-based authentication using Auth0 and JWT validation.
+</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="architecture">
+
+<div class="container">
+
+<h2>System Architecture</h2>
+
+<p>
+The application follows a layered architecture separating frontend rendering, API communication, analytics processing, and visualization systems.
+</p>
+
+<pre><code>
+┌──────────────────────┐
+│      Frontend UI     │
+│ HTML • CSS • JS      │
+└──────────┬───────────┘
+           │
+           ▼
+┌──────────────────────┐
+│      FastAPI API     │
+│ Async Backend Layer  │
+└──────────┬───────────┘
+           │
+           ▼
+┌──────────────────────┐
+│ GitHub REST API      │
+│ Repository Data      │
+└──────────┬───────────┘
+           │
+           ▼
+┌──────────────────────┐
+│ Analytics Engine     │
+│ Data Processing      │
+└──────────┬───────────┘
+           │
+           ▼
+┌──────────────────────┐
+│ Visualization Layer  │
+│ Charts & Dashboard   │
+└──────────────────────┘
+</code></pre>
+
+</div>
+
+</section>
+
+<section>
+
+<div class="container">
+
+<h2>Application Workflow</h2>
+
+<pre><code>
+User Login
+    │
+    ▼
+Repository Selection
+    │
+    ▼
+FastAPI Backend
+    │
+    ▼
+GitHub API Fetching
+    │
+    ▼
+Analytics Processing
+    │
+    ▼
+JSON Response
+    │
+    ▼
+Dashboard Visualization
+</code></pre>
+
+<p>
+The frontend communicates asynchronously with the backend using REST APIs. Dashboard components dynamically update without requiring page reloads.
+</p>
+
+</div>
+
+</section>
+
+<section id="backend">
+
+<div class="container">
+
+<h2>Backend Engineering</h2>
+
+<p>
+The backend was developed using <span class="highlight">FastAPI</span> because of its asynchronous architecture, lightweight performance, and clean API development workflow.
+</p>
+
+<p>
+The backend handles:
+</p>
+
+<ul>
+<li>GitHub API integration</li>
+<li>repository data aggregation</li>
+<li>analytics computation</li>
+<li>authentication validation</li>
+<li>structured JSON responses</li>
+<li>contributor analysis</li>
+</ul>
+
+<h3 style="margin-top:40px;">
+Sample FastAPI Route
+</h3>
+
+<pre><code>
+@app.get("/repos/{owner}/{repo}")
+
+async def fetch_repository(owner: str, repo: str):
+
+    data = github_service.fetch_repo(owner, repo)
+
+    analytics = process_repository_data(data)
+
+    return analytics
+</code></pre>
+
+</div>
+
+</section>
+
+<section id="analytics">
+
+<div class="container">
+
+<h2>Analytics Processing</h2>
+
+<p>
+The analytics engine transforms raw GitHub repository data into structured engineering insights.
+</p>
+
+<ul>
+<li>commit frequency trends</li>
+<li>contributor impact scoring</li>
+<li>branch activity metrics</li>
+<li>repository health indicators</li>
+<li>pull request analytics</li>
+<li>repository growth patterns</li>
+</ul>
+
+<p>
+Instead of simply counting commits, the Contributor Analytics Engine evaluates activity consistency, collaboration participation, and contribution distribution.
+</p>
+
+</div>
+
+</section>
+
+<section>
+
+<div class="container">
+
+<h2>Technology Stack</h2>
+
+<div class="table-wrapper">
+
+<table>
+
+<tr>
+<th>Layer</th>
+<th>Technologies</th>
+</tr>
+
+<tr>
+<td>Frontend</td>
+<td>HTML5, CSS3, JavaScript</td>
+</tr>
+
+<tr>
+<td>Backend</td>
+<td>FastAPI, Python</td>
+</tr>
+
+<tr>
+<td>Authentication</td>
+<td>Auth0, OAuth 2.0, JWT</td>
+</tr>
+
+<tr>
+<td>Visualization</td>
+<td>Chart.js, Mermaid.js, Three.js</td>
+</tr>
+
+<tr>
+<td>Database</td>
+<td>MongoDB</td>
+</tr>
+
+<tr>
+<td>API Integration</td>
+<td>GitHub REST API</td>
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="challenges">
+
+<div class="container">
+
+<h2>Engineering Challenges</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>API Rate Limiting</h3>
+<p>
+Optimized asynchronous requests and reduced unnecessary GitHub API calls.
+</p>
+</div>
+
+<div class="card">
+<h3>Large Data Aggregation</h3>
+<p>
+Processed large contributor datasets and repository activity efficiently.
+</p>
+</div>
+
+<div class="card">
+<h3>Real-Time Updates</h3>
+<p>
+Implemented dynamic dashboard updates without page reloads.
+</p>
+</div>
+
+<div class="card">
+<h3>Authentication Security</h3>
+<p>
+Integrated OAuth authentication and JWT-based route validation.
+</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="future">
+
+<div class="container">
+
+<h2>Future Scope</h2>
+
+<ul>
+<li>AI-powered repository health prediction</li>
+<li>GitLab and Bitbucket integration</li>
+<li>technical debt detection</li>
+<li>organization-wide analytics</li>
+<li>CI/CD monitoring</li>
+<li>predictive contributor intelligence</li>
+</ul>
+
+</div>
+
+</section>
+
+<footer>
+
+<div class="container">
+
+<p>
+Built by Manish Varma • Full Stack Developer • Backend Engineering • System Design
+</p>
+
+</div>
+
+</footer>
+
+</body>
+</html>

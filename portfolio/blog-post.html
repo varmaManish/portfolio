@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script>try{var _t=localStorage.getItem("mv_theme");if(_t){var _v=JSON.parse(_t),_r=document.documentElement;for(var _k in _v)_r.style.setProperty(_k,_v[_k]);}}catch(e){}</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog | Manish Varma</title>
+  <meta name="description" content="Technical article by Manish Varma — AI Engineer & Software Developer.">
+  <link rel="canonical" href="https://manish-dev.in/blog-post.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .post-layout {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: calc(var(--nav-h) + 4rem) 5% 6rem;
+    }
+    .post-back {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 3rem;
+      transition: color 0.2s;
+    }
+    .post-back:hover { color: var(--accent); }
+    .post-meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .post-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2rem, 4.5vw, 3rem);
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      color: var(--ink);
+      line-height: 1.08;
+      margin-bottom: 1.5rem;
+    }
+    .post-excerpt {
+      font-size: 1.15rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .post-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 3rem; }
+    .post-content { font-size: 1.08rem; line-height: 1.85; color: var(--text); }
+    .post-content h2 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 2.5rem 0 1rem;
+      letter-spacing: -0.5px;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .post-content h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--darkbr);
+      margin: 2rem 0 0.75rem;
+    }
+    .post-content p { margin-bottom: 1.5rem; }
+    .post-content ul, .post-content ol {
+      padding-left: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .post-content li { margin-bottom: 0.5rem; }
+    .post-content code {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.85em;
+      background: var(--warm1);
+      border: 1px solid var(--border);
+      padding: 0.15em 0.4em;
+      border-radius: 4px;
+      color: var(--brown);
+    }
+    .post-content pre {
+      background: var(--ink);
+      color: var(--cream);
+      padding: 1.75rem;
+      border-radius: 14px;
+      overflow-x: auto;
+      margin: 2rem 0;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.82rem;
+      line-height: 1.65;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .post-content pre code { background: none; border: none; padding: 0; color: inherit; font-size: inherit; }
+    .post-content blockquote {
+      border-left: 3px solid var(--accent);
+      padding: 0.5rem 0 0.5rem 1.5rem;
+      color: var(--muted);
+      font-style: italic;
+      margin: 2rem 0;
+    }
+    .post-content a { color: var(--accent); text-decoration: underline; }
+    .post-content strong { color: var(--ink); font-weight: 600; }
+    .post-divider { border: none; border-top: 1px solid var(--border); margin: 3rem 0; }
+    .post-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 2rem;
+    }
+    .skeleton {
+      background: linear-gradient(90deg, var(--warm1) 25%, var(--warm2) 50%, var(--warm1) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      border-radius: 6px;
+    }
+    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+    .sk-title { height: 48px; margin-bottom: 1rem; }
+    .sk-line { height: 18px; margin-bottom: 0.75rem; }
+    .sk-line.short { width: 60%; }
+    .not-found { text-align: center; padding: 4rem 0; }
+    .not-found h2 { font-family: 'Fraunces', serif; font-size: 2rem; margin-bottom: 1rem; }
+    .not-found p { color: var(--muted); margin-bottom: 2rem; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav id="nav" aria-label="Main Navigation">
+      <div class="nav-logo"><a href="/" aria-label="Home">Manish<span>.</span></a></div>
+      <ul class="nav-links">
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="index.html#skills">Skills</a></li>
+        <li><a href="blog.html" class="active">Blog</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+        <li><a href="/assets/ManishResume.pdf" target="_blank" class="nav-cta">Resume ↗</a></li>
+      </ul>
+      <button class="nav-ham" id="ham" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+    <div class="mob-menu" id="mobMenu" aria-hidden="true">
+      <a href="index.html#about">About</a>
+      <a href="projects.html">Projects</a>
+      <a href="index.html#skills">Skills</a>
+      <a href="blog.html">Blog</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="/assets/ManishResume.pdf" target="_blank">Download Resume ↗</a>
+    </div>
+  </header>
+
+  <main>
+    <article class="post-layout" id="postLayout">
+      <!-- Loading skeleton -->
+      <div class="skeleton sk-line short" style="width:180px; height:14px; margin-bottom:3rem;"></div>
+      <div class="skeleton sk-line short" style="width:120px; height:14px; margin-bottom:1rem;"></div>
+      <div class="skeleton sk-title"></div>
+      <div class="skeleton sk-title" style="height:36px; width:80%;"></div>
+      <div style="margin-top:2rem;">
+        <div class="skeleton sk-line"></div>
+        <div class="skeleton sk-line"></div>
+        <div class="skeleton sk-line short"></div>
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">Manish<span>.</span></div>
+      <nav class="footer-links" aria-label="Footer Navigation">
+        <a href="index.html#about">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="blog.html">Blog</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+      <span class="footer-copy">© 2026 Manish Varma · Palghar, India</span>
+    </div>
+  </footer>
+
+  <button class="back-top" aria-label="Back to top">↑</button>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/main.js" defer></script>
+  <script>
+    async function loadPost() {
+      const params = new URLSearchParams(window.location.search);
+      const postId = params.get('id');
+
+      if (!postId) { showNotFound(); return; }
+
+      try {
+        const doc = await db.collection('blogs').doc(postId).get();
+        if (!doc.exists) { showNotFound(); return; }
+
+        const post = { id: doc.id, ...doc.data() };
+
+        // Update page meta
+        document.title = post.title + ' | Manish Varma';
+        document.querySelector('meta[name="description"]').content = post.excerpt || '';
+
+        // Render post
+        const tags = (post.tags || []).map(t =>
+          `<span class="ptag">${t}</span>`
+        ).join('');
+
+        document.getElementById('postLayout').innerHTML = `
+          <a href="blog.html" class="post-back">← All Articles</a>
+          <div class="post-meta">
+            <span>${post.date || ''}</span>
+            ${post.category ? `<span>· ${post.category}</span>` : ''}
+          </div>
+          <h1 class="post-title">${post.title}</h1>
+          ${post.excerpt ? `<p class="post-excerpt">${post.excerpt}</p>` : ''}
+          ${tags ? `<div class="post-tags">${tags}</div>` : ''}
+          <div class="post-content" id="postContent"></div>
+          <hr class="post-divider">
+          <div class="post-nav">
+            <a href="blog.html" class="btn-warm btn-stroke btn-sm">← Back to Blog</a>
+            <a href="index.html#contact" class="btn-warm btn-fill btn-sm">Get in Touch →</a>
+          </div>
+        `;
+
+        // Safely render HTML content
+        document.getElementById('postContent').innerHTML = post.content || '<p>Content coming soon.</p>';
+
+      } catch (e) {
+        showNotFound('Could not load this post. ' + e.message);
+      }
+    }
+
+    function showNotFound(msg) {
+      document.getElementById('postLayout').innerHTML = `
+        <div class="not-found">
+          <h2>Post not found</h2>
+          <p>${msg || 'This article may have been moved or deleted.'}</p>
+          <a href="blog.html" class="btn-warm btn-fill">← Back to Blog</a>
+        </div>
+      `;
+    }
+
+    loadPost();
+  </script>
+</body>
+</html>

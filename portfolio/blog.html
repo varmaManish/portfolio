@@ -135,12 +135,15 @@
 
     async function loadBlogs() {
       try {
-        const snap = await db.collection('blogs')
-          .where('published', '==', true)
-          .orderBy('createdAt', 'desc')
-          .get();
+        const snap = await db.collection('blogs').get();
         if (snap.empty) { renderBlogs(STATIC_BLOGS, false); return; }
-        const blogs = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+        const blogs = snap.docs
+          .map(d => ({ id: d.id, ...d.data() }))
+          .sort((a, b) => {
+            const ta = a.createdAt?.toMillis?.() || 0;
+            const tb = b.createdAt?.toMillis?.() || 0;
+            return tb - ta;
+          });
         renderBlogs(blogs, true);
       } catch (e) {
         // Firebase not configured — use static fallback
