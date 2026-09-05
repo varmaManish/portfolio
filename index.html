@@ -385,7 +385,7 @@
         window._typingPhrases = s.typingPhrases;
       }
     }
-  } catch (_) { /* Firebase not configured — silently use hardcoded content */ }
+  } catch (e) { console.error('[Portfolio] settings read failed:', e); }
 
   // ── DYNAMIC SKILLS ──
   try {
@@ -411,7 +411,7 @@
         }
       }
     }
-  } catch (_) { /* Fallback to hardcoded skills */ }
+  } catch (e) { console.error('[Portfolio] skills read failed:', e); }
 
   // ── EXPERIENCE ──
   try {
@@ -452,7 +452,7 @@
         }
       }
     }
-  } catch (_) { /* No experience data */ }
+  } catch (e) { console.error('[Portfolio] experience read failed:', e); }
 
   // ── FEATURED PROJECTS (top 3) ──
   try {
@@ -514,7 +514,7 @@
         .catch(() => {});
     }
 
-  } catch (_) { /* Firebase not configured — show hardcoded cards */ }
+  } catch (e) { console.error('[Portfolio] projects read failed:', e); }
 
 })();
 </script>
