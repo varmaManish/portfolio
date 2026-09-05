@@ -15,14 +15,14 @@ let experience = [];
 
 // ── AUTH GUARD ──────────────────────────────────────────────
 auth.onAuthStateChanged(user => {
-  if (!user) { window.location.href = 'index.html'; return; }
+  if (!user) { window.location.href = '/admin/'; return; }
   document.getElementById('adminEmail').textContent = user.email;
   init();
 });
 
 document.getElementById('logoutBtn').addEventListener('click', async () => {
   await auth.signOut();
-  window.location.href = 'index.html';
+  window.location.href = '/admin/';
 });
 
 // ── INIT ────────────────────────────────────────────────────

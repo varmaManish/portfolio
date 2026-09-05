@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,300&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="/admin/admin.css">
 </head>
 <body class="login-page">
 
@@ -35,13 +35,13 @@
       <div class="error-msg" id="errorMsg"></div>
     </form>
 
-    <a href="../index.html" class="back-link">← Back to Portfolio</a>
+    <a href="/index.html" class="back-link">← Back to Portfolio</a>
   </div>
 
   <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
-  <script src="../js/firebase-config.js"></script>
+  <script src="/js/firebase-config.js"></script>
   <script>
     console.log('[Admin Auth] Login page loaded');
     console.log('[Admin Auth] Current URL:', window.location.href);
@@ -50,7 +50,7 @@
     console.log('[Admin Auth] Firebase auth domain:', firebaseConfig.authDomain);
     auth.onAuthStateChanged(user => {
       console.log('[Admin Auth] Auth state changed:', user ? `signed in as ${user.email}` : 'no active user');
-      if (user) window.location.href = 'dashboard.html';
+      if (user) window.location.href = '/admin/dashboard.html';
     });
 
     const loginForm = document.getElementById('loginForm');
@@ -74,7 +74,7 @@
           document.getElementById('password').value
         );
         console.log('[Admin Auth] Sign-in successful for:', email);
-        window.location.href = 'dashboard.html';
+        window.location.href = '/admin/dashboard.html';
       } catch (err) {
         console.error('[Admin Auth] Sign-in failed:', {
           code: err.code,
